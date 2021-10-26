@@ -4,15 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Your To-Do List"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/etTask"
+        android:layout_width="409dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="28dp"
+        android:hint="I want to.. (Add your task)"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
