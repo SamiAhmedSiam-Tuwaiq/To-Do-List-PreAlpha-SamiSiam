@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/TasksViewMainFragment">
+
+    <fragment
+        android:id="@+id/TasksViewMainFragment"
+        android:name="com.tuwaiq.to_do_list_prealpha_samisiam.TasksFragment"
+        android:label="main_fragment"
+        tools:layout="@layout/tasks_view_fragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_details"
+            app:destination="@id/taskDetails"
+            app:enterAnim="@anim/nav_default_pop_enter_anim"
+            app:exitAnim="@anim/nav_default_pop_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskDetails"
+        android:name="com.tuwaiq.to_do_list_prealpha_samisiam.TaskDetailsFragment"
+        android:label="details_fragment"
+        tools:layout="@layout/task_details_fragment" >
+
+        <argument
+            android:name="userKey"
+            app:argType="com.tuwaiq.to_do_list_prealpha_samisiam.data.model.Task"/>
+    </fragment>
+</navigation>
