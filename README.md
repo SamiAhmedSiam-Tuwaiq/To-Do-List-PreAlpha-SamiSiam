@@ -23,14 +23,11 @@ device.
 - Fragments Navigation  
 - View Model
 - Repository Pattern
-- 
-
-Not yet:
 - Live Data
 - Room Database/Firebase database
 - Coroutines
-  
-- 
+- Parcelize
+-
 
 ### Notes:
 - التعليقات باللغة العربية هي خاصة لتوثيق مفاهيم متدرب لغة كوتلين لعمل تطبيقات اندرويد
