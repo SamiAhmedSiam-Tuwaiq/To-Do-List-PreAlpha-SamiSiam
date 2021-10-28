@@ -28,16 +28,18 @@ class TasksFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tasksVM = ViewModelProvider(this).get(TasksVM::class.java)
-        val isLandscape = view.findViewById<FrameLayout>(R.id.taskDetails) != null
-        recyclerView = view.findViewById(R.id.rvTaskView)
-        recyclerView.layoutManager = LinearLayoutManager(this.context)
-        recyclerView.adapter = TaskRVAdapter(tasksVM.getAllUsers(), isLandscape)
 
-        //These three lines of code, were in the MainActivity.kt (RecyclerViewLesson):
-        //recyclerView = findViewById(R.id.rvTaskView)
-        //recyclerView.layoutManager = LinearLayoutManager(this)
-        //recyclerView.adapter = TaskRVAdapter(taskData)
+        recyclerView = view.findViewById(R.id.rvTaskView)
+        val isLandscape = view.findViewById<FrameLayout>(R.id.taskDetails) != null
+        tasksVM = ViewModelProvider(this).get(TasksVM::class.java)
+        tasksVM.fillDB()
+        tasksVM.getAllTasks().observe(viewLifecycleOwner, {
+            recyclerView.adapter = TaskRVAdapter(it, isLandscape)
+        })
+
+        recyclerView.layoutManager = LinearLayoutManager(this.context)
+
+
     }
 
 }
