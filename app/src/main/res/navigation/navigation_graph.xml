@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/TasksViewMainFragment">
+    app:startDestination="@id/TasksFragment">
 
     <fragment
-        android:id="@+id/TasksViewMainFragment"
+        android:id="@+id/TasksFragment"
         android:name="com.tuwaiq.to_do_list_prealpha_samisiam.TasksFragment"
         android:label="main_fragment"
-        tools:layout="@layout/tasks_view_fragment" >
+        tools:layout="@layout/tasks_fragment" >
         <action
             android:id="@+id/action_mainFragment_to_details"
             app:destination="@id/taskDetails"

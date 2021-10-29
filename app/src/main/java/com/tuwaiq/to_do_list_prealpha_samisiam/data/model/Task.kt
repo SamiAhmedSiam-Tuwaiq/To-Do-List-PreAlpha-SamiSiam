@@ -9,13 +9,13 @@ import java.util.*
 @Parcelize
 @Entity(tableName = "task_table")
 data class Task (
-    @PrimaryKey
-    val taskId: Int,
     val taskTitle: String,
     val isTaskCompletedIndication: Boolean,
     //val taskDueDate: Date?,
     val taskDueDate: Long?,
     //val taskEntryTime: Date,
     val taskEntryTime: Long,
-    val taskDescription: String?
+    val taskDescription: String?,
+    @PrimaryKey (autoGenerate = true)
+    val taskId: Int = 0
 ) : Parcelable
