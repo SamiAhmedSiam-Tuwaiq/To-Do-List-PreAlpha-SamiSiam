@@ -18,11 +18,10 @@ class TaskRVAdapter(private val taskList: List<Task>, private val isLandscape: B
     override fun onBindViewHolder(holder: TaskAdapter, position: Int) {
         val task = taskList[position]
         //holder.taskTitleET.text = "[task $position] ${task.taskTitle}"
-        holder.taskTitleTV.text = "[task ${position + 1}] ${task.taskTitle}"
-        holder.taskCreationDateTV.text = task.taskEntryTime.toString()
+        //holder.taskTitleTV.text = "[task ${position + 1}] ${task.taskTitle}"
+        holder.taskTitleTV.text = "${task.taskTitle}"
+        //holder.taskCreationDateTV.text = task.taskEntryTime.toString()
         //holder.taskTitleET
-
-        // اعطاء القيم(assignment) بيكون هنا
     }
 
     override fun getItemCount(): Int {
@@ -34,7 +33,7 @@ class TaskRVAdapter(private val taskList: List<Task>, private val isLandscape: B
 //class TaskAdapter(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
 class TaskAdapter(itemView: View): RecyclerView.ViewHolder(itemView) {
     val taskTitleTV: TextView = itemView.findViewById(R.id.tvEnteredTaskId)
-    val taskCreationDateTV: TextView = itemView.findViewById(R.id.tvCreationDate)
+    //val taskCreationDateTV: TextView = itemView.findViewById(R.id.tvCreationDate)
     //val taskTitleET: EditText = itemView.findViewById(R.id.etTaskEntry)
         // كود الربط بين الواجهة والمتغيرات في صفحة الكود، هنا
 
@@ -46,5 +45,4 @@ class TaskAdapter(itemView: View): RecyclerView.ViewHolder(itemView) {
     //Example:
     //Toast.makeText(itemView.context, "${idTextView.text} clicked", Toast.LENGTH_SHORT).show()
     }*/
-
 }
