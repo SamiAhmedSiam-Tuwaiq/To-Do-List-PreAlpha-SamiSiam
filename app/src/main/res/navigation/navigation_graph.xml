@@ -17,6 +17,9 @@
             app:exitAnim="@anim/nav_default_pop_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_TasksFragment_to_updateTask"
+            app:destination="@id/updateTask" />
     </fragment>
     <fragment
         android:id="@+id/taskDetails"
@@ -28,4 +31,13 @@
             android:name="userKey"
             app:argType="com.tuwaiq.to_do_list_prealpha_samisiam.data.model.Task"/>
     </fragment>
+    <dialog
+        android:id="@+id/updateTask"
+        android:name="com.tuwaiq.to_do_list_prealpha_samisiam.UpdateTask"
+        android:label="fragment_update_task"
+        tools:layout="@layout/fragment_update_task" >
+        <argument
+            android:name="taskKey"
+            app:argType="com.tuwaiq.to_do_list_prealpha_samisiam.data.model.Task" />
+    </dialog>
 </navigation>

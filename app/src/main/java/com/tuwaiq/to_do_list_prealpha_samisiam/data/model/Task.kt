@@ -10,7 +10,7 @@ import java.util.*
 @Entity(tableName = "task_table")
 data class Task (
     //● The task’s title
-    val taskTitle: String,
+    var taskTitle: String,
     //● An indication of whether the task is completed
     val isTaskCompletedIndication: Boolean,
 
