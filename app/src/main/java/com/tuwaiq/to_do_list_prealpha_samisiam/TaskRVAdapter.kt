@@ -3,12 +3,19 @@ package com.tuwaiq.to_do_list_prealpha_samisiam
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.tuwaiq.to_do_list_prealpha_samisiam.data.model.Task
 
-class TaskRVAdapter(private val taskList: List<Task>, private val isLandscape: Boolean): RecyclerView.Adapter<TaskAdapter>() {
+/*الادابتر هوا تبع لستة الريسايكل فيو
+وهوا المسئول عن انو يملي الصفحة ب الفيو هولدرز
+والفيو هولدر هوا المسؤول عن انو يملي item_view
+*/
+
+class TaskRVAdapter(private var taskList: List<Task>, private val isLandscape: Boolean, private val tasksVM: TasksVM, val tvWelcomeText: TextView): RecyclerView.Adapter<TaskAdapter>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskAdapter {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.task_rv_item_layout, parent,false)
@@ -17,11 +24,20 @@ class TaskRVAdapter(private val taskList: List<Task>, private val isLandscape: B
 
     override fun onBindViewHolder(holder: TaskAdapter, position: Int) {
         val task = taskList[position]
-        //holder.taskTitleET.text = "[task $position] ${task.taskTitle}"
-        //holder.taskTitleTV.text = "[task ${position + 1}] ${task.taskTitle}"
+
         holder.taskTitleTV.text = "${task.taskTitle}"
-        //holder.taskCreationDateTV.text = task.taskEntryTime.toString()
-        //holder.taskTitleET
+        holder.itemView.setOnClickListener {
+            tasksVM.task.postValue(task)
+        }
+        holder.btnDelete.setOnClickListener {
+            tasksVM.delete(task)
+            taskList -= task
+            notifyItemRemoved(position)
+            welcomeText(taskList, tvWelcomeText)
+            //notifyDataSetChanged()
+            //tasksVM.getAllTasks()
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -33,7 +49,8 @@ class TaskRVAdapter(private val taskList: List<Task>, private val isLandscape: B
 //class TaskAdapter(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
 class TaskAdapter(itemView: View): RecyclerView.ViewHolder(itemView) {
     val taskTitleTV: TextView = itemView.findViewById(R.id.tvEnteredTaskId)
-    //val taskCreationDateTV: TextView = itemView.findViewById(R.id.tvCreationDate)
+    val btnDelete: ImageButton = itemView.findViewById(R.id.iBtnDelete)
+//    val taskCreationDateTV: TextView = itemView.findViewById(R.id.tvCreationDate)
     //val taskTitleET: EditText = itemView.findViewById(R.id.etTaskEntry)
         // كود الربط بين الواجهة والمتغيرات في صفحة الكود، هنا
 

@@ -1,5 +1,6 @@
 package com.tuwaiq.to_do_list_prealpha_samisiam
 
+import android.app.Application
 import android.opengl.Visibility
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -11,6 +12,8 @@ import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Delete
+import com.tuwaiq.to_do_list_prealpha_samisiam.data.model.Task
 
 class TasksFragment : Fragment() {
 
@@ -20,9 +23,13 @@ class TasksFragment : Fragment() {
 
     private lateinit var tasksVM: TasksVM
     private lateinit var recyclerView: RecyclerView
+    private lateinit var taskRVAdapter: TaskRVAdapter
+
     lateinit var etEnterATask: EditText
     lateinit var btnSend: ImageButton
     lateinit var tvWelcomeText: TextView
+    lateinit var btnDelete: ImageButton
+    lateinit var tasksList: List<Task>
 
 
     override fun onCreateView(
@@ -35,6 +42,7 @@ class TasksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //btnDelete = view.findViewById(R.id.iBtnDelete)
         tvWelcomeText = view.findViewById(R.id.tvWelcomeText)
         btnSend = view.findViewById(R.id.btnSend)
         etEnterATask = view.findViewById(R.id.etEnterATask)
@@ -43,25 +51,41 @@ class TasksFragment : Fragment() {
         tasksVM = ViewModelProvider(this).get(TasksVM::class.java)
         //tasksVM.fillDB()
         tasksVM.getAllTasks().observe(viewLifecycleOwner, Observer{
-            recyclerView.adapter = TaskRVAdapter(it, isLandscape)
+            recyclerView.adapter = TaskRVAdapter(it, isLandscape, TasksVM(Application()), tvWelcomeText)
             if (it.isEmpty()) tvWelcomeText.visibility = View.VISIBLE
             else tvWelcomeText.visibility = View.GONE
         })
         recyclerView.layoutManager = LinearLayoutManager(this.context)
 
-        btnSend.setOnClickListener {
+/*        tasksVM.task.observe(viewLifecycleOwner) {
+            task ->
+            btnDelete.setOnClickListener {
+                tasksVM.delete(task)
+                taskRVAdapter
+            }
+        }*/
 
+        btnSend.setOnClickListener {
         val taskTitle:String = etEnterATask.text.toString()
         tasksVM.insert(taskTitle).observe(viewLifecycleOwner, Observer {
             tasksVM.getAllTasks().observe(viewLifecycleOwner, Observer{
-                recyclerView.adapter = TaskRVAdapter(it, isLandscape)
-                if (it.isEmpty()) tvWelcomeText.visibility = View.VISIBLE
-                else tvWelcomeText.visibility = View.GONE
+                recyclerView.adapter = TaskRVAdapter(it, isLandscape, TasksVM(Application()), tvWelcomeText)
+                welcomeText(it, tvWelcomeText)
             })
         })
         etEnterATask.text = null
         }
-    }
+
+    } // onViewCreated
 
 
+} //TasksFragment
+
+//fun refreshRV() {
+//
+//}
+
+fun welcomeText(taskList: List<Task>, tvWelcomeText: TextView) {
+    if (taskList.isEmpty()) tvWelcomeText.visibility = View.VISIBLE
+    else tvWelcomeText.visibility = View.GONE
 }
