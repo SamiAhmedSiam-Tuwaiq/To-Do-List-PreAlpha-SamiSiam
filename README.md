@@ -29,5 +29,14 @@ device.
 - Parcelize
 -
 
+Required features:
+1.Add Task
+2.Delete Task
+3.Update Task
+4.Completion Indication
+5.DueDate
+6.Description
+7."Screen"
+
 ### Notes:
 - التعليقات باللغة العربية هي خاصة لتوثيق مفاهيم متدرب لغة كوتلين لعمل تطبيقات اندرويد

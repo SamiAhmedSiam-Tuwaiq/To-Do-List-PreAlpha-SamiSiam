@@ -46,5 +46,7 @@ class Repo(context: Context) {
         appDB.taskDao.delete(taskToDelete)
     }
     //edit tasks
-
+    suspend fun updateATask(task: Task) = withContext(Dispatchers.IO) {
+        appDB.taskDao.update(task)
+    }
 }

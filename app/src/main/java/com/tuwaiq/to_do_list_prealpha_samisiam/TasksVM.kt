@@ -36,6 +36,12 @@ class TasksVM(context: Application) : AndroidViewModel(context) {
         viewModelScope.launch { unit.postValue(repo.deleteATask(taskToDelete)) }
         return unit
     }
+
+    fun update(task: Task) {
+        val unit = MutableLiveData<Unit>()
+        viewModelScope.launch {
+            unit.postValue(repo.updateATask(task))
+        }
+        //return unit
+    }
 }
-
-

@@ -51,7 +51,7 @@ class TasksFragment : Fragment() {
         tasksVM = ViewModelProvider(this).get(TasksVM::class.java)
         //tasksVM.fillDB()
         tasksVM.getAllTasks().observe(viewLifecycleOwner, Observer{
-            recyclerView.adapter = TaskRVAdapter(it, isLandscape, TasksVM(Application()), tvWelcomeText)
+            recyclerView.adapter = TaskRVAdapter(it, isLandscape, TasksVM(Application()), tvWelcomeText, view)
             if (it.isEmpty()) tvWelcomeText.visibility = View.VISIBLE
             else tvWelcomeText.visibility = View.GONE
         })
@@ -69,7 +69,7 @@ class TasksFragment : Fragment() {
         val taskTitle:String = etEnterATask.text.toString()
         tasksVM.insert(taskTitle).observe(viewLifecycleOwner, Observer {
             tasksVM.getAllTasks().observe(viewLifecycleOwner, Observer{
-                recyclerView.adapter = TaskRVAdapter(it, isLandscape, TasksVM(Application()), tvWelcomeText)
+                recyclerView.adapter = TaskRVAdapter(it, isLandscape, TasksVM(Application()), tvWelcomeText, view)
                 welcomeText(it, tvWelcomeText)
             })
         })
