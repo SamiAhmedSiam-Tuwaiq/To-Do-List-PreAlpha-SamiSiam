@@ -12,7 +12,7 @@ data class Task (
     //● The task’s title
     var taskTitle: String,
     //● An indication of whether the task is completed
-    val isTaskCompletedIndication: Boolean,
+    var isTaskCompletedIndication: Boolean,
 
     //● The task’s due date, if one has been provided by the user:
     //○ If the task is past due, an indication of this fact..(appears?)..If the user taps on the cell, they should

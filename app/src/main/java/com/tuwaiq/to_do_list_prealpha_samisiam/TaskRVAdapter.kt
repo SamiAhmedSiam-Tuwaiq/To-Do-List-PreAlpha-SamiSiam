@@ -1,19 +1,21 @@
 package com.tuwaiq.to_do_list_prealpha_samisiam
 
 import android.app.DatePickerDialog
+import android.content.ContentValues.TAG
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.tuwaiq.to_do_list_prealpha_samisiam.data.model.Task
 //import android.R
 import android.graphics.Paint
+import android.icu.text.SimpleDateFormat
+import android.util.Log
+import android.widget.Toast
 import java.util.*
 
 
@@ -34,6 +36,7 @@ class TaskRVAdapter(private var taskList: List<Task>,
     }
 
     override fun onBindViewHolder(holder: TaskAdapter, position: Int) {
+
         //create object of Calendar
         val calendar = Calendar.getInstance()
         // add day of month
@@ -44,11 +47,65 @@ class TaskRVAdapter(private var taskList: List<Task>,
 
         val task = taskList[position]
 
+/*
+        First prepare the time in mills:
+        Long currentTime = System.currentTimeMillis();
+
+        Choose your desire format with SimpleDateFormat:
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss");
+
+        Create your date object:
+        Date date = new Date(currentTime);
+
+        Apply that format into your date object:
+        String time = simpleDateFormat.format(date);
+
+        Log it:
+        Log.d(TAG, "onCreate: " + time);
+
+        Result:
+        17:05:73*/
+
+        //val currentTime: Long = System.currentTimeMillis()
+        val creationCurrentTime = task.taskEntryTime
+        val dueDateCurrentTime = task.taskDueDate
+
+        val simpleDateFormat: SimpleDateFormat = SimpleDateFormat("dd/MMMM/yyyy")
+//        val simpleDateFormat: SimpleDateFormat = SimpleDateFormat("dd/MMMM(MM)/yyyy")
+        val simpleTimeFormat: SimpleDateFormat = SimpleDateFormat("hh:mm:ss")
+
+        val creationObject: Date = Date(creationCurrentTime)
+        val dueDateObject: Date = Date(dueDateCurrentTime!!)
+
+        val creationFormattedDate: String = simpleDateFormat.format(creationObject)
+        val creationFormattedTime: String = simpleTimeFormat.format(creationObject)
+
+        if (dueDateCurrentTime != null) {
+            if (dueDateCurrentTime.equals(0)) {
+
+                val creationObject: Date = Date(creationCurrentTime)
+                val dueDateObject: Date = Date(dueDateCurrentTime!!)
+
+                var dueDateFormattedDate: String = simpleDateFormat.format(dueDateObject)
+                var dueDateFormattedTime: String = simpleTimeFormat.format(dueDateObject)
+                dueDateFormattedDate = "No picked-date available"
+                dueDateFormattedTime = "No picked-time available"
+            }
+        }
+
+        var dueDateFormattedDate: String = simpleDateFormat.format(dueDateObject)
+        var dueDateFormattedTime: String = simpleTimeFormat.format(dueDateObject)
+        Log.d(TAG, "!!#######!!  Entry-Date: $creationFormattedDate, Entry-Time: $creationFormattedTime!!#######!!\n!!#######!!  Due-Date: $dueDateFormattedDate, Entry-Time: $dueDateFormattedTime!!#######!!")
+
+
+        holder.taskCreationDateTV.text = "Entry-Date: [$creationFormattedDate, $creationFormattedTime]"
+        holder.taskDueDateTV.text = "Due-Date: [$dueDateFormattedDate, $dueDateFormattedTime]"
         holder.taskTitleTV.text = "${task.taskTitle}"
+        //holder.
         holder.itemView.setOnClickListener {
             tasksVM.task.postValue(task)
         }
-        holder.btnDelete.setOnClickListener {
+        holder.btnDeleteIB.setOnClickListener {
             tasksVM.delete(task)
             taskList -= task
             notifyItemRemoved(position)
@@ -56,7 +113,7 @@ class TaskRVAdapter(private var taskList: List<Task>,
             //notifyDataSetChanged()
             //tasksVM.getAllTasks()
         }
-        holder.btnUpdate.setOnClickListener {
+        holder.btnUpdateIB.setOnClickListener {
             val action: NavDirections = TasksFragmentDirections.actionTasksFragmentToUpdateTask(task)
             view.findNavController().navigate(action)
 //            tasksVM.update(task)
@@ -67,19 +124,29 @@ class TaskRVAdapter(private var taskList: List<Task>,
         holder.taskTitleTV.setOnClickListener {
             //val someTextView = findViewById(R.id.some_text_view) as TextView
             //someTextView.setText(someString)
-            if (holder.taskTitleTV.paintFlags == holder.taskTitleTV.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG)
-                holder.taskTitleTV.setPaintFlags(holder.taskTitleTV.getPaintFlags() and Paint.STRIKE_THRU_TEXT_FLAG.inv())
-            else holder.taskTitleTV.paintFlags = holder.taskTitleTV.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+
+            if (holder.taskTitleTV.paintFlags == holder.taskTitleTV.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG) {
+                holder.taskTitleTV.paintFlags = holder.taskTitleTV.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                task.isTaskCompletedIndication = false
+                Toast.makeText(view.context, "Task completion has been set to ${task.isTaskCompletedIndication}", Toast.LENGTH_SHORT).show()
+            }
+
+            else {
+                holder.taskTitleTV.paintFlags = holder.taskTitleTV.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                Toast.makeText(view.context, "\"${task.taskTitle}\" task has been completed, Horrraaaaaaay !! \n(👏👏👏👏 🙌🙌🙌)", Toast.LENGTH_SHORT).show()
+                task.isTaskCompletedIndication = true
+            }
+
         }
-/*        holder.btnDueDate.setOnClickListener {
+        holder.btnDueDateIB.setOnClickListener {
                 view?.let { it1 ->
-                    DatePickerDialog(it1, DatePickerDialog.OnDateSetListener{ _, y, m, d ->
+                    DatePickerDialog(view.context, DatePickerDialog.OnDateSetListener{ _, d, m, y ->
                         date = "$d/$m/$y"
-                        holder.btnDueDate.setText(date)
-                    },year,month, day)
+                        holder.taskDueDateTV.setText(date)
+                    },day,month,year)
                         .show()
                 }
-            }*/
+            }
 
         }
 
@@ -93,12 +160,11 @@ class TaskRVAdapter(private var taskList: List<Task>,
 //class TaskAdapter(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
 class TaskAdapter(itemView: View): RecyclerView.ViewHolder(itemView) {
     val taskTitleTV: TextView = itemView.findViewById(R.id.tvEnteredTaskId)
-    val btnDelete: ImageButton = itemView.findViewById(R.id.iBtnDelete)
-    val btnUpdate: ImageButton = itemView.findViewById(R.id.iBtnEdit)
-//    val btnDueDate: ImageButton = itemView.findViewById(R.id.iBtnDueDate)
-//    val taskCreationDateTV: TextView = itemView.findViewById(R.id.tvCreationDate)
-    //val taskTitleET: EditText = itemView.findViewById(R.id.etTaskEntry)
-        // كود الربط بين الواجهة والمتغيرات في صفحة الكود، هنا
+    val btnDeleteIB: ImageButton = itemView.findViewById(R.id.iBtnDelete)
+    val btnUpdateIB: ImageButton = itemView.findViewById(R.id.iBtnEdit)
+    val btnDueDateIB: ImageButton = itemView.findViewById(R.id.iBtnDueDate)
+    val taskCreationDateTV: TextView = itemView.findViewById(R.id.tvCreationDate)
+    val taskDueDateTV: TextView = itemView.findViewById(R.id.tvPickedDate)
 
 /*    init {
             itemView.setOnClickListener(this)
