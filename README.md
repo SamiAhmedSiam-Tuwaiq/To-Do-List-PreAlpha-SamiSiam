@@ -42,16 +42,16 @@ in previous four weeks of the program.
 ![](app/src/main/res/drawable-v24/AddTask.gif)
 
 ### DeleteATask gif
-![](DeleteATask.gif)
+![](app/src/main/res/drawable-v24/DeleteATask.gif)
 
 ### EditATask gif
-![](EditATask.gif)
+![](app/src/main/res/drawable-v24/EditATask.gif)
 
 ### Handling Empty RVList gif
-![](Handling Empty RVList.gif)
+![](app/src/main/res/drawable-v24/Handling Empty RVList.gif)
 
 ### TaskCompletionIndication gif
-![](TaskCompletionIndication.gif)
+![](app/src/main/res/drawable-v24/TaskCompletionIndication.gif)
 
 
 
