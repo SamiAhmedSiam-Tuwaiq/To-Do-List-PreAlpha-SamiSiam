@@ -16,6 +16,9 @@ import android.graphics.Paint
 import android.icu.text.SimpleDateFormat
 import android.util.Log
 import android.widget.Toast
+import java.time.LocalDateTime
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -104,6 +107,18 @@ class TaskRVAdapter(private var taskList: List<Task>,
         //holder.
         holder.itemView.setOnClickListener {
             tasksVM.task.postValue(task)
+            if (task.isTaskCompletedIndication && task.taskDueDate!! >= task.taskEntryTime) {
+                holder.itemView.isEnabled = false
+                holder.itemView.setOnClickListener {
+                    val action: NavDirections =
+                        TasksFragmentDirections.actionMainFragmentToDetails(task)
+                    view.findNavController().navigate(action)
+//            tasksVM.update(task)
+//            notifyDataSetChanged()
+//            welcomeText(taskList, tvWelcomeText)
+                    //tasksVM.getAllTasks()
+                }
+            }
         }
         holder.btnDeleteIB.setOnClickListener {
             tasksVM.delete(task)
@@ -143,12 +158,29 @@ class TaskRVAdapter(private var taskList: List<Task>,
                     DatePickerDialog(view.context, DatePickerDialog.OnDateSetListener{ _, d, m, y ->
                         date = "$d/$m/$y"
                         holder.taskDueDateTV.setText(date)
+                        //val receivedDate = date
+                        //String date = "Tue Apr 23 16:08:28 GMT+05:30 2013"
+                        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern(
+                            //"EEE MMM dd HH:mm:ss z yyyy",
+                            "dd/MMMM/yyyy",
+                            Locale.ENGLISH
+                        )
+                        val localDate: LocalDateTime = LocalDateTime.parse(date, formatter)
+                        val timeInMilliseconds: Long = localDate.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli()
+                        Log.d(TAG, "Date in milli :: FOR API >= 26 >>> $timeInMilliseconds")
+                        Log.d(TAG, "Date in milli :: FOR API >= 26 >>> ${task.taskEntryTime}")
+                        // Output is -> Date in milli :: FOR API >= 26 >>> 1366733308000
+
+                        task.taskDueDate = timeInMilliseconds
+                        tasksVM.update(task)
+                        notifyDataSetChanged()
                     },day,month,year)
                         .show()
                 }
             }
 
         }
+
 
 
     override fun getItemCount(): Int {

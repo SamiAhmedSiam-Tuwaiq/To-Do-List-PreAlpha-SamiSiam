@@ -28,7 +28,7 @@
         tools:layout="@layout/task_details_fragment" >
 
         <argument
-            android:name="userKey"
+            android:name="taskDetailsKey"
             app:argType="com.tuwaiq.to_do_list_prealpha_samisiam.data.model.Task"/>
     </fragment>
     <dialog
