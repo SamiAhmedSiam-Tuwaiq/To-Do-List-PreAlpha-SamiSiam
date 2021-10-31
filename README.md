@@ -54,9 +54,6 @@ in previous four weeks of the program.
 ![](app/src/main/res/drawable-v24/TaskCompletionIndication.gif)
 
 
-
-
-
 ### Tuwaiq-1000 Program: Jeddah Kotlin1 (Sep2021) ###
 
 # Capstone 1(Individual Project): To-Do List Application
