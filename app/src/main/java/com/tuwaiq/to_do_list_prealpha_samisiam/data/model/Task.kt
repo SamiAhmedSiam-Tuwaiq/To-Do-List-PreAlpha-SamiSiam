@@ -19,7 +19,7 @@ data class Task (
     //see a screen for editing additional task details, including:
 
     //val taskDueDate: Date?,
-    val taskDueDate: Long?,
+    var taskDueDate: Long?,
 
     //● The creation date
     //val taskEntryTime: Date,
