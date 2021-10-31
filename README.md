@@ -1,3 +1,62 @@
+# To-Do-List-PreAlpha-SamiSiam
+---
+
+<!--- Replace <SamiAhmedSiam> with your Github Username and <https://github.com/SamiAhmedSiam?tab=repositories> with the name of your repository. -->
+<!--- You can find both of these in the url bar when you open your repository in github. -->
+
+
+## :scroll: Description
+---
+This is my application description, what you have learned and what you, and what the ideas you have added in this app
+## Implemented Kotlin+Android-Studio Concepts/Chapters:
+- Recycler View List
+- Fragments
+- Fragments Navigation
+- View Model
+- Repository Pattern
+- Live Data
+- Room Database
+- Coroutines
+- Parcelize
+
+Required features:
+1.Add Task
+2.Delete Task
+3.Update Task
+4.Completion Indication
+5.DueDate
+6.Description
+7."Screen"
+
+Additions: Handling empty recycler view list by making it into a welcoming text. 
+
+## :bulb: Motivation and Context
+---
+Capstone 1 To-List Application (Individual Project): 
+the passion to implement and apply learnt concepts
+in previous four weeks of the program.
+
+## :camera_flash: Screenshots
+---
+### AddTask gif
+![](app/src/main/res/drawable-v24/AddTask.gif)
+
+### DeleteATask gif
+![](DeleteATask.gif)
+
+### EditATask gif
+![](EditATask.gif)
+
+### Handling Empty RVList gif
+![](Handling Empty RVList.gif)
+
+### TaskCompletionIndication gif
+![](TaskCompletionIndication.gif)
+
+
+
+
+
 ### Tuwaiq-1000 Program: Jeddah Kotlin1 (Sep2021) ###
 
 # Capstone 1(Individual Project): To-Do List Application
@@ -17,25 +76,7 @@ The user must be able to add, delete and edit tasks. The data for the to do l is
 data should be l ost i f the user terminates and relaunches the application, or i f the user reboots their
 device.
 
-## Implemented Kotlin+Android-Studio Concepts/Chapters:
-- Recycler View List
-- Fragments
-- Fragments Navigation  
-- View Model
-- Repository Pattern
-- Live Data
-- Room Database
-- Coroutines
-- Parcelize
 
-Required features:
-1.Add Task
-2.Delete Task
-3.Update Task
-4.Completion Indication
-5.DueDate
-6.Description
-7."Screen"
 
 ### Notes:
 - التعليقات باللغة العربية هي خاصة لتوثيق مفاهيم متدرب لغة كوتلين لعمل تطبيقات اندرويد
