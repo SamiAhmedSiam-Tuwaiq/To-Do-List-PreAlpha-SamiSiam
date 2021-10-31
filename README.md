@@ -18,16 +18,15 @@ data should be l ost i f the user terminates and relaunches the application, or 
 device.
 
 ## Implemented Kotlin+Android-Studio Concepts/Chapters:
-- Recycler View
+- Recycler View List
 - Fragments
 - Fragments Navigation  
 - View Model
 - Repository Pattern
 - Live Data
-- Room Database/Firebase database
+- Room Database
 - Coroutines
 - Parcelize
--
 
 Required features:
 1.Add Task

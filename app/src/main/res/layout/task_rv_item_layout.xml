@@ -3,32 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    style="@style/Base.CardView">
 
     <TextView
         android:id="@+id/tvEnteredTaskId"
-        android:layout_width="242dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="15dp"
+        android:layout_width="389dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="16dp"
+        android:maxLines="20"
+        android:inputType="textMultiLine"
         android:hint="Entered Task"
         android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:imeOptions="actionDone"/>
+        app:layout_constraintVertical_bias="0.05" />
+<!--    android:imeOptions="actionDone"-->
+    <!--    android:text="Delete Task"-->
+
+    <ImageButton
+        android:id="@+id/iBtnDueDate"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="4dp"
+        android:src="@drawable/ic_date_range_24"
+        android:tooltipText="Task Due Date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEnteredTaskId"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
         android:id="@+id/iBtnDelete"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="4dp"
         android:background="@drawable/ic_delete_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iBtnEdit"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        />
-<!--    android:text="Delete Task"-->
+        app:layout_constraintEnd_toStartOf="@+id/iBtnDueDate"
+        app:layout_constraintTop_toBottomOf="@+id/tvEnteredTaskId"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
         android:id="@+id/iBtnEdit"
@@ -36,21 +52,32 @@
         android:layout_height="40dp"
         android:src="@drawable/ic_edit_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvEnteredTaskId"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/iBtnDelete"
+        app:layout_constraintTop_toBottomOf="@+id/tvEnteredTaskId"
         app:layout_constraintVertical_bias="1.0" />
 
-    <ImageButton
-        android:id="@+id/iBtnDueDate"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="4dp"
-        android:src="@drawable/ic_date_range_24"
-        android:tooltipText="Task Due Date"
+    <TextView
+        android:id="@+id/tvCreationDate"
+        android:layout_width="wrap_content"
+        android:textSize="13sp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="2dp"
+        android:hint="Creation Date"
+        app:layout_constraintTop_toBottomOf="@+id/tvEnteredTaskId"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvPickedDate"/>
+
+    <TextView
+        android:id="@+id/tvPickedDate"
+        android:layout_width="wrap_content"
+        android:textSize="13sp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:hint="Picked DueDate"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iBtnDelete"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,9 @@ import android.view.ViewGroup
 
 class TaskDetailsFragment : Fragment() {
 
+    // (a "screen" that has: TaskTitle,
+    // isTaskCompleted,
+    // TaskDueDate, CreationDate & Description)
     companion object {
         fun newInstance() = TaskDetailsFragment()
     }

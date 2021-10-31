@@ -49,7 +49,9 @@
             android:layout_height="match_parent"
             android:autofillHints="name"
             android:hint="I want to.. (enter a to-do task)"
-            android:inputType="text" />
+            android:inputType="text"
+
+            />
 
         <ImageButton
             android:id="@+id/btnSend"

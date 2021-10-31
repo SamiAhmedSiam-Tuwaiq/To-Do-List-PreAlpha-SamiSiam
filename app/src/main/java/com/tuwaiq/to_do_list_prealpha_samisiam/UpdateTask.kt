@@ -10,13 +10,11 @@ import android.widget.ImageButton
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-import com.tuwaiq.to_do_list_prealpha_samisiam.data.model.Task
-import kotlinx.android.synthetic.main.fragment_update_task.*
 
 class UpdateTask : DialogFragment() {
 
     private lateinit var tasksVM: TasksVM
-    private lateinit var updateTask: EditText
+    private lateinit var etUpdateTask: EditText
     private lateinit var btnSendUpdate: ImageButton
 
     override fun onStart() {
@@ -43,10 +41,11 @@ class UpdateTask : DialogFragment() {
         val task = args.taskKey
 
 
-        updateTask = view.findViewById(R.id.etUpdateTask)
+        etUpdateTask = view.findViewById(R.id.etUpdateTask)
         btnSendUpdate = view.findViewById(R.id.btnSend)
 
         btnSendUpdate.setOnClickListener {
+            //etUpdateTask = task.taskTitle.toString()
             val newTaskTitle:String = etUpdateTask.text.toString()
             //var task = Task()
             task.taskTitle = newTaskTitle

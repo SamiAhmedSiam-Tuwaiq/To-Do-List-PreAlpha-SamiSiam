@@ -11,7 +11,7 @@
         android:text="Task Details:" />
 
     <TextView
-        android:id="@+id/tvCreationDate"
+        android:id="@+id/tvCreationDateInDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="creation date"

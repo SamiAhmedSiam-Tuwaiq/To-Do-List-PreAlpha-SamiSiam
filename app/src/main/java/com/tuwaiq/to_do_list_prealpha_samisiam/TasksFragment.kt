@@ -46,6 +46,7 @@ class TasksFragment : Fragment() {
         tvWelcomeText = view.findViewById(R.id.tvWelcomeText)
         btnSend = view.findViewById(R.id.btnSend)
         etEnterATask = view.findViewById(R.id.etEnterATask)
+        //etEnterATask.text = null
         recyclerView = view.findViewById(R.id.rvTaskView)
         val isLandscape = view.findViewById<FrameLayout>(R.id.taskDetails) != null
         tasksVM = ViewModelProvider(this).get(TasksVM::class.java)
@@ -65,7 +66,12 @@ class TasksFragment : Fragment() {
             }
         }*/
 
+
         btnSend.setOnClickListener {
+//            if (etEnterATask.text.isNotEmpty()) btnSend.visibility = View.VISIBLE
+//            else btnSend.visibility = View.GONE
+//            if (etEnterATask.text.isNotBlank()) btnSend.visibility = View.VISIBLE
+//            else btnSend.visibility = View.GONE
         val taskTitle:String = etEnterATask.text.toString()
         tasksVM.insert(taskTitle).observe(viewLifecycleOwner, Observer {
             tasksVM.getAllTasks().observe(viewLifecycleOwner, Observer{
